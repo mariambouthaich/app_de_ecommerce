@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.LoginAdminController"
+           styleClass="admin-root"
+           stylesheets="@../css/styles-admin.css"
+           prefWidth="480" prefHeight="440">
+
+    <VBox alignment="CENTER" maxWidth="420">
+        <VBox styleClass="admin-card" spacing="22">
+            <padding><Insets top="44" right="44" bottom="44" left="44"/></padding>
+
+            <VBox alignment="CENTER" spacing="10">
+                <Label text="🛠" style="-fx-font-size:54px;"/>
+                <Label text="Administration" styleClass="admin-login-title"/>
+                <Label text="Accès réservé aux administrateurs"
+                       styleClass="admin-login-sub"/>
+            </VBox>
+
+            <VBox spacing="7">
+                <Label text="Adresse email" styleClass="admin-field-label"/>
+                <TextField fx:id="emailField"
+                           promptText="aya@mail.com"
+                           styleClass="admin-field"/>
+            </VBox>
+
+            <VBox spacing="7">
+                <Label text="Mot de passe" styleClass="admin-field-label"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="••••••••"
+                               styleClass="admin-field"/>
+            </VBox>
+
+            <Label fx:id="errorLabel" styleClass="admin-error" wrapText="true"/>
+
+            <Button fx:id="loginButton"
+                    text="Se connecter"
+                    styleClass="admin-btn-primary"
+                    maxWidth="Infinity"
+                    onAction="#handleLogin"/>
+
+            <Separator/>
+
+            <Button fx:id="retourBtn"
+                    text="← Retour à l'accueil"
+                    styleClass="admin-btn-back"
+                    maxWidth="Infinity"
+                    onAction="#retourAccueil"/>
+        </VBox>
+    </VBox>
+</StackPane>

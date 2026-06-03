@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.HistoriqueController"
+            styleClass="root-pane"
+            stylesheets="@../css/styles-client.css">
+
+    <!-- ══ HEADER ══════════════════════════════════════════════ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-header">
+            <padding><Insets top="18" right="24" bottom="18" left="24"/></padding>
+            <Button fx:id="retourButton"
+                    text="← Retour"
+                    styleClass="btn-back"
+                    onAction="#retourCatalogue"/>
+            <Label text="📋 Mes Commandes" styleClass="page-title"/>
+        </HBox>
+    </top>
+
+    <!-- ══ CONTENU ══════════════════════════════════════════════ -->
+    <center>
+        <VBox spacing="16">
+            <padding><Insets top="20" right="24" bottom="20" left="24"/></padding>
+
+            <!-- Tableau des commandes -->
+            <Label text="Historique" styleClass="section-title"/>
+            <TableView fx:id="commandesTable" prefHeight="240" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colId"     text="N° Commande" prefWidth="140"/>
+                    <TableColumn fx:id="colDate"   text="Date"        prefWidth="200"/>
+                    <TableColumn fx:id="colStatut" text="Statut"      prefWidth="160"/>
+                </columns>
+                <placeholder>
+                    <Label text="Aucune commande trouvée." styleClass="table-placeholder"/>
+                </placeholder>
+            </TableView>
+
+            <!-- Détail commande sélectionnée -->
+            <Label fx:id="detailLabel"
+                   text="Cliquez sur une commande pour voir le détail"
+                   styleClass="detail-hint"/>
+
+            <TableView fx:id="lignesTable" prefHeight="220" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colProduit" text="Produit"       prefWidth="220"/>
+                    <TableColumn fx:id="colQte"     text="Quantité"      prefWidth="100"/>
+                    <TableColumn fx:id="colPrix"    text="Prix unit."    prefWidth="130"/>
+                    <TableColumn fx:id="colTotal"   text="Total ligne"   prefWidth="130"/>
+                </columns>
+                <placeholder>
+                    <Label text="Sélectionnez une commande ci-dessus." styleClass="table-placeholder"/>
+                </placeholder>
+            </TableView>
+
+        </VBox>
+    </center>
+
+</BorderPane>

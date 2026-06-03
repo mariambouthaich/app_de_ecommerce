@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.DetailproduitController"
+            styleClass="root-pane"
+            stylesheets="@../css/styles-client.css">
+
+    <!-- Header -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-header">
+            <padding><Insets top="16" right="24" bottom="16" left="24"/></padding>
+            <Button fx:id="retourBtn" text="← Retour au catalogue"
+                    styleClass="btn-back" onAction="#retourCatalogue"/>
+            <Label text="🔍 Détail Produit" styleClass="page-title"/>
+        </HBox>
+    </top>
+
+    <!-- Contenu -->
+    <center>
+        <HBox spacing="32" alignment="CENTER">
+            <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
+
+            <!-- Image grande -->
+            <VBox alignment="CENTER" styleClass="section-card" prefWidth="360">
+                <ImageView fx:id="imageView"
+                           fitWidth="320" fitHeight="260"
+                           preserveRatio="true" smooth="true"/>
+                <HBox fx:id="starsBox" alignment="CENTER" spacing="4">
+                    <padding><Insets top="12"/></padding>
+                </HBox>
+            </VBox>
+
+            <!-- Infos produit -->
+            <VBox spacing="16" styleClass="section-card" prefWidth="360">
+                <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+
+                <Label fx:id="nomLabel" styleClass="detail-nom" wrapText="true"/>
+                <Label fx:id="prixLabel" styleClass="detail-prix"/>
+                <Label fx:id="stockLabel" styleClass="detail-stock"/>
+                <Separator/>
+                <Label text="Description" styleClass="field-label"/>
+                <Label fx:id="descLabel" styleClass="detail-desc" wrapText="true"/>
+                <Separator/>
+
+                <!-- Quantité -->
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="Quantité :" styleClass="field-label"/>
+                    <Spinner fx:id="quantiteSpinner" prefWidth="90"
+                             styleClass="qty-spinner"/>
+                </HBox>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <!-- Bouton ajouter -->
+                <Button fx:id="ajouterBtn"
+                        text="🛒  Ajouter au panier"
+                        styleClass="btn-primary"
+                        maxWidth="Infinity"
+                        onAction="#ajouterAuPanier"/>
+            </VBox>
+        </HBox>
+    </center>
+
+</BorderPane>

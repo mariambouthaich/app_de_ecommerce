@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "▶ Lancer E-Commerce",
+            "type": "shell",
+            "command": "C:\\Users\\mohamed\\Downloads\\apache-maven-3.9.16-bin\\apache-maven-3.9.16\\bin\\mvn.cmd",
+            "args": [
+                "javafx:run",
+                "-f",
+                "${workspaceFolder}\\ecommerce_fixed\\pom.xml"
+            ],
+            "options": {
+                "env": {
+                    "JAVA_HOME": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.19.10-hotspot",
+                    "PATH": "C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.19.10-hotspot\\bin"
+                }
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CatalogueController"
+            styleClass="root-pane"
+            stylesheets="@../css/styles-client.css">
+
+    <top>
+        <VBox styleClass="topbar">
+
+            <!-- Navbar -->
+            <HBox alignment="CENTER_LEFT" spacing="14" styleClass="navbar">
+                <padding><Insets top="13" right="24" bottom="13" left="24"/></padding>
+                <Label text="🛍 Ma Boutique" styleClass="nav-logo"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="welcomeLabel" styleClass="nav-welcome"/>
+                <Button fx:id="historiqueButton" text="📋 Commandes"
+                        styleClass="btn-nav" onAction="#ouvrirHistorique"/>
+                <Button fx:id="profilButton" text="👤 Profil"
+                        styleClass="btn-nav" onAction="#ouvrirProfil"/>
+                <StackPane>
+                    <Button fx:id="panierButton" text="🛒 Panier"
+                            styleClass="btn-panier" onAction="#ouvrirPanier"/>
+                    <Label fx:id="badgePanier" text="0"
+                           styleClass="badge-panier" visible="false"
+                           StackPane.alignment="TOP_RIGHT"/>
+                </StackPane>
+                <Button text="Déconnexion" styleClass="btn-logout"
+                        onAction="#seDeconnecter"/>
+            </HBox>
+
+            <!-- Filtres -->
+            <VBox styleClass="filter-bar" spacing="10">
+                <padding><Insets top="12" right="24" bottom="12" left="24"/></padding>
+
+                <!-- Ligne 1 : recherche + catégorie + tri + reset -->
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField"
+                               promptText="🔍  Rechercher un produit..."
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <ComboBox fx:id="categorieCombo" prefWidth="180"
+                              styleClass="combo-categorie"/>
+                    <ComboBox fx:id="triCombo" prefWidth="180"
+                              promptText="Trier par..."
+                              styleClass="combo-categorie"/>
+                    <Button text="✕ Réinitialiser" styleClass="btn-reset"
+                            onAction="#reinitialiserFiltres"/>
+                </HBox>
+
+                <!-- Ligne 2 : fourchette de prix + compteur -->
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <Label text="Prix :" styleClass="filter-label"/>
+                    <Label text="Min" styleClass="filter-hint"/>
+                    <Slider fx:id="prixMinSlider" prefWidth="150" styleClass="price-slider"/>
+                    <Label fx:id="prixMinLabel" text="0 MAD" styleClass="price-value" minWidth="70"/>
+                    <Label text="Max" styleClass="filter-hint"/>
+                    <Slider fx:id="prixMaxSlider" prefWidth="150" styleClass="price-slider"/>
+                    <Label fx:id="prixMaxLabel" text="0 MAD" styleClass="price-value" minWidth="80"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="nbResultatsLabel" text="0 produit(s)" styleClass="filter-hint"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="scroll-catalogue">
+            <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+            <GridPane fx:id="produitsGrid" hgap="0" vgap="0"/>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

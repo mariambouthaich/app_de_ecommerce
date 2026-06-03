@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ProfilController"
+            styleClass="root-pane"
+            stylesheets="@../css/styles-client.css">
+
+    <!-- ══ HEADER ══════════════════════════════════════════════ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-header">
+            <padding><Insets top="18" right="24" bottom="18" left="24"/></padding>
+            <Button fx:id="retourButton"
+                    text="← Retour"
+                    styleClass="btn-back"
+                    onAction="#retourCatalogue"/>
+            <Label text="👤 Mon Profil" styleClass="page-title"/>
+        </HBox>
+    </top>
+
+    <!-- ══ CONTENU ══════════════════════════════════════════════ -->
+    <center>
+        <VBox alignment="TOP_CENTER">
+            <padding><Insets top="30" right="0" bottom="30" left="0"/></padding>
+
+            <VBox styleClass="section-card" maxWidth="480" spacing="16">
+                <padding><Insets top="30" right="36" bottom="30" left="36"/></padding>
+
+                <Label text="Informations personnelles" styleClass="section-title"/>
+                <Separator/>
+
+                <!-- Nom -->
+                <VBox spacing="6">
+                    <Label text="Nom complet" styleClass="field-label"/>
+                    <TextField fx:id="nomField"
+                               styleClass="auth-field"/>
+                </VBox>
+
+                <!-- Email -->
+                <VBox spacing="6">
+                    <Label text="Adresse email" styleClass="field-label"/>
+                    <TextField fx:id="emailField"
+                               styleClass="auth-field"/>
+                </VBox>
+
+                <Label text="Changer le mot de passe" styleClass="section-title"
+                       style="-fx-font-size: 14px; -fx-padding: 10 0 0 0;"/>
+                <Separator/>
+
+                <!-- Ancien mot de passe -->
+                <VBox spacing="6">
+                    <Label text="Ancien mot de passe" styleClass="field-label"/>
+                    <PasswordField fx:id="ancienPasswordField"
+                                   promptText="Laisser vide pour ne pas changer"
+                                   styleClass="auth-field"/>
+                </VBox>
+
+                <!-- Nouveau mot de passe -->
+                <VBox spacing="6">
+                    <Label text="Nouveau mot de passe" styleClass="field-label"/>
+                    <PasswordField fx:id="nouveauPasswordField"
+                                   promptText="Minimum 6 caractères"
+                                   styleClass="auth-field"/>
+                </VBox>
+
+                <!-- Confirmation -->
+                <VBox spacing="6">
+                    <Label text="Confirmer le nouveau mot de passe" styleClass="field-label"/>
+                    <PasswordField fx:id="confirmPasswordField"
+                                   promptText="Répéter le nouveau mot de passe"
+                                   styleClass="auth-field"/>
+                </VBox>
+
+                <!-- Messages -->
+                <Label fx:id="errorLabel"   styleClass="error-label"   wrapText="true"/>
+                <Label fx:id="successLabel" styleClass="success-label" wrapText="true"/>
+
+                <!-- Bouton sauvegarder -->
+                <Button fx:id="sauvegarderButton"
+                        text="💾 Sauvegarder les modifications"
+                        styleClass="btn-primary"
+                        maxWidth="Infinity"
+                        onAction="#sauvegarder"/>
+
+            </VBox>
+        </VBox>
+    </center>
+
+</BorderPane>

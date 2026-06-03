@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CategoriesAdminController"
+            styleClass="admin-root"
+            stylesheets="@../css/styles-admin.css">
+
+    <left>
+        <VBox styleClass="admin-sidebar" spacing="4" prefWidth="230">
+            <padding><Insets top="28" right="12" bottom="28" left="12"/></padding>
+            <Label text="🛠 Admin Panel" styleClass="sidebar-logo"/>
+            <Separator style="-fx-opacity:0.25;"/>
+            <Button text="📊 Dashboard"    styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#retourDashboard"/>
+            <Button text="📦 Produits"     styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirProduits"/>
+            <Button text="📋 Commandes"    styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirCommandes"/>
+            <Button text="👥 Utilisateurs" styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirUsers"/>
+            <Button text="🏷 Catégories"   styleClass="sidebar-btn-active" maxWidth="Infinity"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="🚪 Déconnexion"  styleClass="sidebar-btn-logout" maxWidth="Infinity" onAction="#seDeconnecter"/>
+        </VBox>
+    </left>
+
+    <center>
+        <HBox spacing="18">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <VBox spacing="14" HBox.hgrow="ALWAYS">
+                <Label text="🏷 Gestion des Catégories" styleClass="admin-page-title"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="countLabel" styleClass="admin-count"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="➕ Nouveau" styleClass="admin-btn-primary"
+                            onAction="#nouveau"/>
+                </HBox>
+                <TableView fx:id="table" VBox.vgrow="ALWAYS" styleClass="admin-table">
+                    <columns>
+                        <TableColumn fx:id="colId"  text="ID"  prefWidth="80"/>
+                        <TableColumn fx:id="colNom" text="Nom de la catégorie" prefWidth="380"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="Aucune catégorie." styleClass="admin-placeholder"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <VBox styleClass="admin-form-card" prefWidth="270" spacing="16">
+                <Label fx:id="formTitleLabel" text="➕ Nouvelle catégorie"
+                       styleClass="admin-form-title"/>
+                <Separator/>
+                <Label text="Nom de la catégorie *" styleClass="admin-field-label"/>
+                <TextField fx:id="nomField" styleClass="admin-field"
+                           promptText="Ex: Électronique"/>
+                <Label fx:id="errorLabel" styleClass="admin-error" wrapText="true"/>
+                <Region VBox.vgrow="ALWAYS"/>
+                <Button text="💾 Sauvegarder" styleClass="admin-btn-primary"
+                        maxWidth="Infinity" onAction="#sauvegarder"/>
+                <Button fx:id="supprimerBtn" text="🗑 Supprimer"
+                        styleClass="admin-btn-danger" maxWidth="Infinity"
+                        onAction="#supprimer" disable="true"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

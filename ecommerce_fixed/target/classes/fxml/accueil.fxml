@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.AccueilController"
+           stylesheets="@../css/styles-admin.css"
+           styleClass="accueil-root"
+           prefWidth="680" prefHeight="480">
+
+    <VBox fx:id="rootBox" alignment="CENTER" spacing="0">
+
+        <!-- Header -->
+        <VBox alignment="CENTER" spacing="12">
+            <padding><Insets top="52" right="60" bottom="36" left="60"/></padding>
+            <Label text="🛍" style="-fx-font-size:64px;"/>
+            <Label text="E-Commerce" styleClass="accueil-title"/>
+            <Label text="Votre plateforme de gestion des achats en ligne"
+                   styleClass="accueil-subtitle" wrapText="true"
+                   textAlignment="CENTER" maxWidth="460"/>
+        </VBox>
+
+        <!-- Cartes portail -->
+        <HBox spacing="28" alignment="CENTER">
+            <padding><Insets top="32" right="60" bottom="52" left="60"/></padding>
+
+            <!-- Admin -->
+            <VBox styleClass="portail-card" alignment="CENTER"
+                  spacing="18" prefWidth="232">
+                <padding><Insets top="36" right="26" bottom="36" left="26"/></padding>
+                <Label text="🛠" style="-fx-font-size:46px;"/>
+                <Label text="Administrateur" styleClass="portail-title"/>
+                <Label text="Gérer produits, commandes et clients"
+                       styleClass="portail-desc" wrapText="true"
+                       textAlignment="CENTER"/>
+                <Button fx:id="adminBtn" text="Accéder →"
+                        styleClass="admin-btn-primary"
+                        maxWidth="Infinity"
+                        onAction="#ouvrirAdmin"/>
+            </VBox>
+
+            <Label text="ou" styleClass="accueil-ou"/>
+
+            <!-- Client -->
+            <VBox styleClass="portail-card-client" alignment="CENTER"
+                  spacing="18" prefWidth="232">
+                <padding><Insets top="36" right="26" bottom="36" left="26"/></padding>
+                <Label text="🛒" style="-fx-font-size:46px;"/>
+                <Label text="Client" styleClass="portail-title"/>
+                <Label text="Parcourir le catalogue et passer commande"
+                       styleClass="portail-desc" wrapText="true"
+                       textAlignment="CENTER"/>
+                <Button fx:id="clientBtn" text="Accéder →"
+                        styleClass="client-btn-primary"
+                        maxWidth="Infinity"
+                        onAction="#ouvrirClient"/>
+            </VBox>
+        </HBox>
+
+    </VBox>
+</StackPane>

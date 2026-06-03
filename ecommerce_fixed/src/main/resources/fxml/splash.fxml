@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.SplashController"
+           styleClass="splash-root"
+           stylesheets="@../css/styles-client.css"
+           prefWidth="520" prefHeight="380">
+
+    <VBox fx:id="splashBox" alignment="CENTER" spacing="20">
+        <padding><Insets top="60" right="60" bottom="60" left="60"/></padding>
+
+        <!-- Logo animé -->
+        <Label fx:id="logoLabel" text="🛍" styleClass="splash-logo"/>
+
+        <!-- Titre -->
+        <Label fx:id="titleLabel" text="Ma Boutique" styleClass="splash-title"/>
+
+        <!-- Sous-titre -->
+        <Label fx:id="subtitleLabel"
+               text="Votre expérience shopping en ligne"
+               styleClass="splash-subtitle"/>
+
+        <!-- Spacer -->
+        <Region prefHeight="20"/>
+
+        <!-- Barre de chargement -->
+        <ProgressBar fx:id="progressBar"
+                     prefWidth="300"
+                     styleClass="splash-progress"/>
+
+        <!-- Message de chargement -->
+        <Label fx:id="loadingLabel"
+               text="Initialisation..."
+               styleClass="splash-loading"/>
+
+    </VBox>
+</StackPane>

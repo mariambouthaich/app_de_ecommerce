@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.DashboardController"
+            styleClass="admin-root"
+            stylesheets="@../css/styles-admin.css">
+
+    <!-- ══ SIDEBAR ══════════════════════════════════════════ -->
+    <left>
+        <VBox styleClass="admin-sidebar" spacing="4" prefWidth="230">
+            <padding><Insets top="28" right="12" bottom="28" left="12"/></padding>
+            <Label text="🛠 Admin Panel" styleClass="sidebar-logo"/>
+            <Label fx:id="adminNomLabel" styleClass="sidebar-user"/>
+            <Separator style="-fx-opacity:0.25; -fx-padding: 6 0 6 0;"/>
+            <Button text="📊 Dashboard"    styleClass="sidebar-btn-active" maxWidth="Infinity"/>
+            <Button text="📦 Produits"     styleClass="sidebar-btn" maxWidth="Infinity" onAction="#ouvrirProduits"/>
+            <Button text="📋 Commandes"    styleClass="sidebar-btn" maxWidth="Infinity" onAction="#ouvrirCommandes"/>
+            <Button text="👥 Utilisateurs" styleClass="sidebar-btn" maxWidth="Infinity" onAction="#ouvrirUtilisateurs"/>
+            <Button text="🏷 Catégories"   styleClass="sidebar-btn" maxWidth="Infinity" onAction="#ouvrirCategories"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="🚪 Déconnexion"  styleClass="sidebar-btn-logout" maxWidth="Infinity" onAction="#seDeconnecter"/>
+        </VBox>
+    </left>
+
+    <!-- ══ CONTENU ══════════════════════════════════════════ -->
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="admin-scroll">
+            <VBox spacing="22">
+                <padding><Insets top="28" right="28" bottom="28" left="28"/></padding>
+
+                <!-- Titre + Notification -->
+                <HBox alignment="CENTER_LEFT" spacing="16">
+                    <Label text="📊 Tableau de bord" styleClass="admin-page-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="notifLabel" text="🔔 Nouvelle commande !"
+                           styleClass="notif-label" visible="false"/>
+                </HBox>
+
+                <!-- Cartes KPI ligne 1 -->
+                <HBox spacing="16">
+                    <VBox styleClass="stat-card stat-blue" HBox.hgrow="ALWAYS" spacing="10">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="👥 Utilisateurs" styleClass="stat-label"/>
+                        <Label fx:id="nbUsersLabel" text="—" styleClass="stat-value"/>
+                        <Label text="comptes enregistrés" styleClass="stat-sublabel"/>
+                    </VBox>
+                    <VBox styleClass="stat-card stat-green" HBox.hgrow="ALWAYS" spacing="10">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="📦 Produits" styleClass="stat-label"/>
+                        <Label fx:id="nbProduitsLabel" text="—" styleClass="stat-value"/>
+                        <Label text="produits en catalogue" styleClass="stat-sublabel"/>
+                    </VBox>
+                    <VBox styleClass="stat-card stat-purple" HBox.hgrow="ALWAYS" spacing="10">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="📋 Commandes" styleClass="stat-label"/>
+                        <Label fx:id="nbCommandesLabel" text="—" styleClass="stat-value"/>
+                        <Label text="commandes totales" styleClass="stat-sublabel"/>
+                    </VBox>
+                    <VBox styleClass="stat-card stat-orange" HBox.hgrow="ALWAYS" spacing="10">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="💰 Chiffre d'affaires" styleClass="stat-label"/>
+                        <Label fx:id="caTotalLabel" text="—" styleClass="stat-value-sm"/>
+                        <Label text="revenus générés" styleClass="stat-sublabel"/>
+                    </VBox>
+                    <VBox styleClass="stat-card stat-teal" HBox.hgrow="ALWAYS" spacing="10">
+                        <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                        <Label text="🏷 Catégories" styleClass="stat-label"/>
+                        <Label fx:id="nbCategoriesLabel" text="—" styleClass="stat-value"/>
+                        <Label text="catégories actives" styleClass="stat-sublabel"/>
+                    </VBox>
+                </HBox>
+
+                <!-- ══ SECTION : Alertes Stock + Statuts Commandes ══ -->
+                <Label text="📈 Statistiques détaillées" styleClass="admin-page-title"/>
+
+                <HBox spacing="16">
+                    <!-- Alertes Stock -->
+                    <VBox styleClass="admin-section-card" HBox.hgrow="ALWAYS" spacing="12">
+                        <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                        <Label text="⚠️ Alertes Stock" styleClass="admin-section-title"/>
+                        <HBox spacing="12">
+                            <VBox styleClass="stat-card stat-red" HBox.hgrow="ALWAYS" spacing="6" minWidth="120">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="Ruptures de stock" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="stockAlertLabel" text="—" styleClass="stat-value-sm" wrapText="true"/>
+                                <Label text="produits à 0 en stock" styleClass="stat-sublabel" wrapText="true"/>
+                            </VBox>
+                            <VBox styleClass="stat-card stat-orange" HBox.hgrow="ALWAYS" spacing="6" minWidth="120">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="Stock critique (≤ 5)" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="stockFaibleLabel" text="—" styleClass="stat-value-sm" wrapText="true"/>
+                                <Label text="produits en stock faible" styleClass="stat-sublabel" wrapText="true"/>
+                            </VBox>
+                            <VBox styleClass="stat-card stat-green" HBox.hgrow="ALWAYS" spacing="6" minWidth="160">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="Produit le plus cher" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="produitPlusCherLabel" text="—" styleClass="stat-value-sm" wrapText="true"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+
+                    <!-- Commandes par statut -->
+                    <VBox styleClass="admin-section-card" HBox.hgrow="ALWAYS" spacing="12">
+                        <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                        <Label text="🧾 Commandes par Statut" styleClass="admin-section-title"/>
+                        <HBox spacing="12">
+                            <VBox styleClass="stat-card stat-orange" HBox.hgrow="ALWAYS" spacing="6" minWidth="100">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="⏳ En Attente" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="cmdEnAttenteLabel" text="—" styleClass="stat-value"/>
+                                <Label text="commandes" styleClass="stat-sublabel"/>
+                            </VBox>
+                            <VBox styleClass="stat-card stat-green" HBox.hgrow="ALWAYS" spacing="6" minWidth="100">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="✅ Validée" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="cmdValideeLabel" text="—" styleClass="stat-value"/>
+                                <Label text="commandes" styleClass="stat-sublabel"/>
+                            </VBox>
+                            <VBox styleClass="stat-card stat-blue" HBox.hgrow="ALWAYS" spacing="6" minWidth="100">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="🚚 Livrée" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="cmdLivreeLabel" text="—" styleClass="stat-value"/>
+                                <Label text="commandes" styleClass="stat-sublabel"/>
+                            </VBox>
+                            <VBox styleClass="stat-card stat-red" HBox.hgrow="ALWAYS" spacing="6" minWidth="100">
+                                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                                <Label text="❌ Annulée" styleClass="stat-label" wrapText="true"/>
+                                <Label fx:id="cmdAnnuleeLabel" text="—" styleClass="stat-value"/>
+                                <Label text="commandes" styleClass="stat-sublabel"/>
+                            </VBox>
+                        </HBox>
+                    </VBox>
+                </HBox>
+
+                <!-- ══ Top 5 produits + CA par catégorie ══ -->
+                <HBox spacing="16">
+                    <!-- Top 5 produits -->
+                    <VBox styleClass="admin-section-card" HBox.hgrow="ALWAYS" spacing="12">
+                        <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                        <Label text="🏆 Top 5 Produits Commandés" styleClass="admin-section-title"/>
+                        <VBox fx:id="topProduitsContainer" spacing="8"/>
+                    </VBox>
+
+                    <!-- CA par catégorie -->
+                    <VBox styleClass="admin-section-card" HBox.hgrow="ALWAYS" spacing="12">
+                        <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                        <Label text="💹 CA par Catégorie (MAD)" styleClass="admin-section-title"/>
+                        <VBox fx:id="caCategorieContainer" spacing="8"/>
+                    </VBox>
+                </HBox>
+
+                <!-- ══ Dernières commandes + Utilisateurs récents ══ -->
+                <HBox spacing="16">
+                    <!-- Dernières commandes -->
+                    <VBox styleClass="admin-section-card" HBox.hgrow="ALWAYS" spacing="12">
+                        <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                        <Label text="🕑 Dernières Commandes" styleClass="admin-section-title"/>
+                        <HBox style="-fx-padding: 0 4;">
+                            <Label text="N°"      styleClass="stat-sublabel" minWidth="30"/>
+                            <Label text="Client"  styleClass="stat-sublabel" HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
+                            <Label text="Montant" styleClass="stat-sublabel" minWidth="110"/>
+                            <Label text="Statut"  styleClass="stat-sublabel" minWidth="90"/>
+                        </HBox>
+                        <VBox fx:id="dernieresCommandesContainer" spacing="6"/>
+                    </VBox>
+
+                    <!-- Utilisateurs récents -->
+                    <VBox styleClass="admin-section-card" prefWidth="320" spacing="12">
+                        <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                        <Label text="👥 Utilisateurs Récents" styleClass="admin-section-title"/>
+                        <VBox fx:id="usersRecentContainer" spacing="8"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Actions rapides -->
+                <VBox styleClass="admin-section-card" spacing="14">
+                    <padding><Insets top="18" right="18" bottom="18" left="18"/></padding>
+                    <Label text="⚡ Actions rapides" styleClass="admin-section-title"/>
+                    <HBox spacing="12">
+                        <Button text="➕ Ajouter produit"    styleClass="admin-btn-primary"  onAction="#ouvrirProduits"/>
+                        <Button text="📋 Voir commandes"     styleClass="admin-btn-secondary" onAction="#ouvrirCommandes"/>
+                        <Button text="👥 Gérer utilisateurs" styleClass="admin-btn-secondary" onAction="#ouvrirUtilisateurs"/>
+                        <Button text="🏷 Gérer catégories"   styleClass="admin-btn-secondary" onAction="#ouvrirCategories"/>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.PanierController"
+            styleClass="root-pane"
+            stylesheets="@../css/styles-client.css">
+
+    <!-- ══ HEADER ══════════════════════════════════════════════ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-header">
+            <padding><Insets top="18" right="24" bottom="18" left="24"/></padding>
+            <Button fx:id="retourButton"
+                    text="← Retour"
+                    styleClass="btn-back"
+                    onAction="#retourCatalogue"/>
+            <Label text="🛒 Mon Panier" styleClass="page-title"/>
+        </HBox>
+    </top>
+
+    <!-- ══ TABLEAU DES ARTICLES ════════════════════════════════ -->
+    <center>
+        <VBox spacing="0">
+            <padding><Insets top="20" right="24" bottom="0" left="24"/></padding>
+
+            <TableView fx:id="panierTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colNom"      text="Produit"      prefWidth="300"/>
+                    <TableColumn fx:id="colPrix"     text="Prix unit."   prefWidth="130"/>
+                    <TableColumn fx:id="colQte"      text="Quantité"     prefWidth="150"/>
+                    <TableColumn fx:id="colSousTotal" text="Sous-total"  prefWidth="150"/>
+                </columns>
+                <placeholder>
+                    <Label text="Votre panier est vide 🛒" styleClass="table-placeholder"/>
+                </placeholder>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- ══ PIED — TOTAL + ACTIONS ══════════════════════════════ -->
+    <bottom>
+        <VBox styleClass="panier-footer">
+            <padding><Insets top="16" right="24" bottom="20" left="24"/></padding>
+
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+                <Button fx:id="supprimerButton"
+                        text="🗑 Supprimer"
+                        styleClass="btn-danger"
+                        onAction="#supprimerArticle"/>
+                <Button fx:id="viderButton"
+                        text="Vider le panier"
+                        styleClass="btn-secondary"
+                        onAction="#viderPanier"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="totalLabel"
+                       text="Total : 0.00 MAD"
+                       styleClass="total-label"/>
+                <Button fx:id="validerButton"
+                        text="✅ Valider la commande"
+                        styleClass="btn-primary"
+                        onAction="#validerCommande"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

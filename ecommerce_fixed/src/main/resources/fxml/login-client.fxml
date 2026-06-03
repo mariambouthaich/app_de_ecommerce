@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.LoginClientController"
+           styleClass="root-pane"
+           stylesheets="@../css/styles-client.css">
+
+    <VBox alignment="CENTER" maxWidth="420" spacing="0">
+
+        <!-- Card -->
+        <VBox styleClass="auth-card" spacing="20">
+            <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+            <!-- Logo / Titre -->
+            <VBox alignment="CENTER" spacing="6">
+                <Label text="🛍" style="-fx-font-size: 48px;"/>
+                <Label text="Espace Client" styleClass="auth-title"/>
+                <Label text="Connectez-vous à votre compte" styleClass="auth-subtitle"/>
+            </VBox>
+
+            <!-- Email -->
+            <VBox spacing="6">
+                <Label text="Adresse email" styleClass="field-label"/>
+                <TextField fx:id="emailField"
+                           promptText="votre@email.com"
+                           styleClass="auth-field"/>
+            </VBox>
+
+            <!-- Mot de passe -->
+            <VBox spacing="6">
+                <Label text="Mot de passe" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="••••••••"
+                               styleClass="auth-field"/>
+            </VBox>
+
+            <!-- Message d'erreur -->
+            <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+            <!-- Bouton connexion -->
+            <Button fx:id="loginButton"
+                    text="Se connecter"
+                    styleClass="btn-primary"
+                    maxWidth="Infinity"
+                    onAction="#handleLogin"/>
+
+            <!-- Séparateur -->
+            <Separator/>
+
+            <!-- Lien inscription -->
+            <HBox alignment="CENTER" spacing="6">
+                <Label text="Pas encore de compte ?" styleClass="auth-hint"/>
+                <Hyperlink fx:id="registerLink"
+                           text="Créer un compte"
+                           styleClass="auth-link"
+                           onAction="#handleRegister"/>
+            </HBox>
+
+        </VBox>
+    </VBox>
+</StackPane>

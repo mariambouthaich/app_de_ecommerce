@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ProduitsAdminController"
+            styleClass="admin-root"
+            stylesheets="@../css/styles-admin.css">
+
+    <left>
+        <VBox styleClass="admin-sidebar" spacing="4" prefWidth="230">
+            <padding><Insets top="28" right="12" bottom="28" left="12"/></padding>
+            <Label text="🛠 Admin Panel" styleClass="sidebar-logo"/>
+            <Separator style="-fx-opacity:0.25;"/>
+            <Button text="📊 Dashboard"    styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#retourDashboard"/>
+            <Button text="📦 Produits"     styleClass="sidebar-btn-active" maxWidth="Infinity"/>
+            <Button text="📋 Commandes"    styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirCommandes"/>
+            <Button text="👥 Utilisateurs" styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirUtilisateurs"/>
+            <Button text="🏷 Catégories"   styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirCategories"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="🚪 Déconnexion"  styleClass="sidebar-btn-logout" maxWidth="Infinity" onAction="#seDeconnecter"/>
+        </VBox>
+    </left>
+
+    <center>
+        <HBox spacing="18">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <!-- Tableau gauche -->
+            <VBox spacing="14" HBox.hgrow="ALWAYS">
+                <Label text="📦 Gestion des Produits" styleClass="admin-page-title"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <TextField fx:id="searchField"
+                               promptText="🔍 Rechercher un produit..."
+                               styleClass="admin-search" prefWidth="280"/>
+                    <Label fx:id="countLabel" styleClass="admin-count"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="➕ Nouveau" styleClass="admin-btn-primary"
+                            onAction="#nouveau"/>
+                </HBox>
+                <TableView fx:id="table" VBox.vgrow="ALWAYS" styleClass="admin-table">
+                    <columns>
+                        <TableColumn fx:id="colId"        text="ID"          prefWidth="50"/>
+                        <TableColumn fx:id="colNom"       text="Nom"         prefWidth="155"/>
+                        <TableColumn fx:id="colDesc"      text="Description" prefWidth="195"/>
+                        <TableColumn fx:id="colPrix"      text="Prix"        prefWidth="105"/>
+                        <TableColumn fx:id="colStock"     text="Stock"       prefWidth="78"/>
+                        <TableColumn fx:id="colCategorie" text="Catégorie"   prefWidth="115"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="Aucun produit." styleClass="admin-placeholder"/>
+                    </placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- Formulaire droite -->
+            <VBox styleClass="admin-form-card" prefWidth="305" spacing="12">
+                <Label fx:id="formTitleLabel" text="➕ Nouveau produit"
+                       styleClass="admin-form-title"/>
+                <Separator/>
+
+                <Label text="Nom *" styleClass="admin-field-label"/>
+                <TextField fx:id="nomField" styleClass="admin-field"
+                           promptText="Nom du produit"/>
+
+                <Label text="Description" styleClass="admin-field-label"/>
+                <TextArea fx:id="descField" prefHeight="65" styleClass="admin-field"
+                          promptText="Description du produit..." wrapText="true"/>
+
+                <HBox spacing="12">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Prix (MAD) *" styleClass="admin-field-label"/>
+                        <TextField fx:id="prixField" styleClass="admin-field"
+                                   promptText="0.00"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Stock *" styleClass="admin-field-label"/>
+                        <TextField fx:id="stockField" styleClass="admin-field"
+                                   promptText="0"/>
+                    </VBox>
+                </HBox>
+
+                <Label text="Catégorie *" styleClass="admin-field-label"/>
+                <ComboBox fx:id="categorieCombo" maxWidth="Infinity"
+                          styleClass="admin-combo" promptText="Choisir..."/>
+
+                <!-- Upload image -->
+                <Label text="Image produit" styleClass="admin-field-label"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <StackPane styleClass="image-preview-box" prefWidth="80" prefHeight="60">
+                        <ImageView fx:id="imagePreview"
+                                   fitWidth="76" fitHeight="56"
+                                   preserveRatio="true" smooth="true"/>
+                        <Label text="📷" style="-fx-font-size:22px; -fx-opacity:0.4;"
+                               fx:id="imageIcon"/>
+                    </StackPane>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS">
+                        <Button fx:id="uploadImageBtn"
+                                text="📂 Choisir image"
+                                styleClass="admin-btn-secondary"
+                                maxWidth="Infinity"
+                                onAction="#uploadImage"/>
+                        <Label fx:id="imagePathLabel"
+                               text="Aucune image sélectionnée"
+                               styleClass="admin-count"
+                               wrapText="true"/>
+                    </VBox>
+                </HBox>
+
+                <Label fx:id="errorLabel" styleClass="admin-error" wrapText="true"/>
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Button text="💾 Sauvegarder" styleClass="admin-btn-primary"
+                        maxWidth="Infinity" onAction="#sauvegarder"/>
+                <Button fx:id="supprimerBtn" text="🗑 Supprimer"
+                        styleClass="admin-btn-danger" maxWidth="Infinity"
+                        onAction="#supprimer" disable="true"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

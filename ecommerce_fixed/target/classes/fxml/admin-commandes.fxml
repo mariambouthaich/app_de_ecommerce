@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CommandesAdminController"
+            styleClass="admin-root"
+            stylesheets="@../css/styles-admin.css">
+
+    <left>
+        <VBox styleClass="admin-sidebar" spacing="4" prefWidth="230">
+            <padding><Insets top="28" right="12" bottom="28" left="12"/></padding>
+            <Label text="🛠 Admin Panel" styleClass="sidebar-logo"/>
+            <Separator style="-fx-opacity:0.25;"/>
+            <Button text="📊 Dashboard"    styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#retourDashboard"/>
+            <Button text="📦 Produits"     styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirProduits"/>
+            <Button text="📋 Commandes"    styleClass="sidebar-btn-active" maxWidth="Infinity"/>
+            <Button text="👥 Utilisateurs" styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirUsers"/>
+            <Button text="🏷 Catégories"   styleClass="sidebar-btn"        maxWidth="Infinity" onAction="#ouvrirCategories"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button text="🚪 Déconnexion"  styleClass="sidebar-btn-logout" maxWidth="Infinity" onAction="#seDeconnecter"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="16">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <Label text="📋 Gestion des Commandes" styleClass="admin-page-title"/>
+
+            <!-- Filtres -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField"
+                           promptText="🔍 Rechercher par N° ou client..."
+                           styleClass="admin-search" prefWidth="300"/>
+                <Label fx:id="countLabel" styleClass="admin-count"/>
+            </HBox>
+
+            <!-- Tableau commandes -->
+            <TableView fx:id="commandesTable" prefHeight="250"
+                       styleClass="admin-table" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId"     text="N° Cmd"  prefWidth="80"/>
+                    <TableColumn fx:id="colUser"   text="Client"  prefWidth="200"/>
+                    <TableColumn fx:id="colDate"   text="Date"    prefWidth="155"/>
+                    <TableColumn fx:id="colStatut" text="Statut"  prefWidth="145"/>
+                </columns>
+                <placeholder>
+                    <Label text="Aucune commande." styleClass="admin-placeholder"/>
+                </placeholder>
+            </TableView>
+
+            <!-- Actions statut + total -->
+            <HBox spacing="14" alignment="CENTER_LEFT"
+                  styleClass="admin-section-card">
+                <padding><Insets top="14" right="18" bottom="14" left="18"/></padding>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label fx:id="detailLabel"
+                           text="Sélectionnez une commande pour voir le détail"
+                           styleClass="admin-detail-label" wrapText="true"/>
+                    <Label fx:id="totalCommandeLabel"
+                           text="" styleClass="admin-total-label"/>
+                </VBox>
+                <ComboBox fx:id="statutCombo" prefWidth="165"
+                          styleClass="admin-combo"/>
+                <Button text="✅ Changer statut"
+                        styleClass="admin-btn-primary"
+                        onAction="#changerStatut"/>
+                <Button text="🗑 Supprimer"
+                        styleClass="admin-btn-danger"
+                        onAction="#supprimerCommande"/>
+            </HBox>
+
+            <!-- Lignes de la commande -->
+            <Label text="Détail des articles de la commande sélectionnée"
+                   styleClass="admin-section-title"/>
+            <TableView fx:id="lignesTable" prefHeight="190"
+                       styleClass="admin-table">
+                <columns>
+                    <TableColumn fx:id="colProduitId"  text="Produit ID"  prefWidth="120"/>
+                    <TableColumn fx:id="colQte"        text="Quantité"    prefWidth="100"/>
+                    <TableColumn fx:id="colPrix"       text="Prix unit."  prefWidth="130"/>
+                    <TableColumn fx:id="colTotalLigne" text="Total ligne" prefWidth="130"/>
+                </columns>
+                <placeholder>
+                    <Label text="Sélectionnez une commande ci-dessus."
+                           styleClass="admin-placeholder"/>
+                </placeholder>
+            </TableView>
+
+        </VBox>
+    </center>
+</BorderPane>

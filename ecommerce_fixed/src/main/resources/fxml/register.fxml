@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="controller.RegisterController"
+           styleClass="root-pane"
+           stylesheets="@../css/styles-client.css">
+
+    <VBox alignment="CENTER" maxWidth="440" spacing="0">
+
+        <VBox styleClass="auth-card" spacing="18">
+            <padding><Insets top="36" right="40" bottom="36" left="40"/></padding>
+
+            <!-- Titre -->
+            <VBox alignment="CENTER" spacing="6">
+                <Label text="✨" style="-fx-font-size: 40px;"/>
+                <Label text="Créer un compte" styleClass="auth-title"/>
+                <Label text="Rejoignez notre boutique en ligne" styleClass="auth-subtitle"/>
+            </VBox>
+
+            <!-- Nom complet -->
+            <VBox spacing="6">
+                <Label text="Nom complet" styleClass="field-label"/>
+                <TextField fx:id="nomField"
+                           promptText="Prénom Nom"
+                           styleClass="auth-field"/>
+            </VBox>
+
+            <!-- Email -->
+            <VBox spacing="6">
+                <Label text="Adresse email" styleClass="field-label"/>
+                <TextField fx:id="emailField"
+                           promptText="votre@email.com"
+                           styleClass="auth-field"/>
+            </VBox>
+
+            <!-- Mot de passe -->
+            <VBox spacing="6">
+                <Label text="Mot de passe" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField"
+                               promptText="Minimum 6 caractères"
+                               styleClass="auth-field"/>
+            </VBox>
+
+            <!-- Confirmation mot de passe -->
+            <VBox spacing="6">
+                <Label text="Confirmer le mot de passe" styleClass="field-label"/>
+                <PasswordField fx:id="confirmPasswordField"
+                               promptText="Répéter le mot de passe"
+                               styleClass="auth-field"/>
+            </VBox>
+
+            <!-- Erreur -->
+            <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+            <!-- Bouton inscription -->
+            <Button fx:id="registerButton"
+                    text="Créer mon compte"
+                    styleClass="btn-primary"
+                    maxWidth="Infinity"
+                    onAction="#handleRegister"/>
+
+            <Separator/>
+
+            <!-- Retour login -->
+            <HBox alignment="CENTER" spacing="6">
+                <Label text="Déjà un compte ?" styleClass="auth-hint"/>
+                <Hyperlink fx:id="loginLink"
+                           text="Se connecter"
+                           styleClass="auth-link"
+                           onAction="#handleGoToLogin"/>
+            </HBox>
+
+        </VBox>
+    </VBox>
+</StackPane>

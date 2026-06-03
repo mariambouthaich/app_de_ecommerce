@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.CommandeController"
+            styleClass="root-pane"
+            stylesheets="@../css/styles-client.css">
+
+    <!-- ══ HEADER ══════════════════════════════════════════════ -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-header">
+            <padding><Insets top="18" right="24" bottom="18" left="24"/></padding>
+            <Button fx:id="retourButton"
+                    text="← Retour"
+                    styleClass="btn-back"
+                    onAction="#retourPanier"/>
+            <Label text="✅ Confirmer la commande" styleClass="page-title"/>
+        </HBox>
+    </top>
+
+    <!-- ══ CONTENU ══════════════════════════════════════════════ -->
+    <center>
+        <HBox spacing="24" alignment="TOP_CENTER">
+            <padding><Insets top="24" right="24" bottom="24" left="24"/></padding>
+
+            <!-- Récapitulatif panier -->
+            <VBox spacing="14" styleClass="section-card" HBox.hgrow="ALWAYS">
+                <Label text="📋 Récapitulatif" styleClass="section-title"/>
+                <Separator/>
+                <ScrollPane fitToWidth="true" prefHeight="260" styleClass="recap-scroll">
+                    <VBox fx:id="recapBox" spacing="8">
+                        <padding><Insets top="8" right="8" bottom="8" left="8"/></padding>
+                    </VBox>
+                </ScrollPane>
+                <Separator/>
+                <Label fx:id="totalLabel"
+                       text="Total : 0.00 MAD"
+                       styleClass="total-label"
+                       alignment="CENTER_RIGHT"/>
+            </VBox>
+
+            <!-- Adresse de livraison -->
+            <VBox spacing="14" styleClass="section-card" prefWidth="300">
+                <Label text="📦 Adresse de livraison" styleClass="section-title"/>
+                <Separator/>
+
+                <VBox spacing="6">
+                    <Label text="Adresse" styleClass="field-label"/>
+                    <TextField fx:id="adresseField"
+                               promptText="12 rue des Fleurs"
+                               styleClass="auth-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Ville" styleClass="field-label"/>
+                    <TextField fx:id="villeField"
+                               promptText="Casablanca"
+                               styleClass="auth-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Code postal" styleClass="field-label"/>
+                    <TextField fx:id="codePostalField"
+                               promptText="20000"
+                               styleClass="auth-field"/>
+                </VBox>
+
+                <Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <Button fx:id="confirmerButton"
+                        text="🎉 Confirmer et payer"
+                        styleClass="btn-primary"
+                        maxWidth="Infinity"
+                        onAction="#confirmerCommande"/>
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>
